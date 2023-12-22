@@ -1,3 +1,8 @@
 #index:
 #    path: /
 #    controller: App\Controller\DefaultController::index
+
+# Rutas para Controlador de Usuario
+user:
+  path: /user
+  controller: App\Controller\UserController::index
