@@ -4,5 +4,10 @@
 
 # Rutas para Controlador de Usuario
 user:
-  path: /user
+  path: /usuario
   controller: App\Controller\UserController::index
+
+# Rutas para Controlador de Vídeo
+video:
+  path: /video
+  controller: App\Controller\VideoController::index
