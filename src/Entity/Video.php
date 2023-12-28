@@ -66,7 +66,7 @@ class Video
     /**
      * @var \User
      *
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inverssedBy="videos")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="videos")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      * })
