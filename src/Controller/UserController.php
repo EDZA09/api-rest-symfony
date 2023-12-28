@@ -20,6 +20,10 @@ class UserController extends AbstractController
         
         foreach ($users as $user){
             echo "<h1>{$user->getName()} {$user->getSurname()}</h1>";
+            
+            foreach($user->getVideos() as $video){
+                echo "<p>{$video->getTitle()} - {$video->getUser()->getEmail()}</p>";
+            }
         }
         
         die();
