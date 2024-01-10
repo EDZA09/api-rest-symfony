@@ -29,7 +29,7 @@ class UserController extends AbstractController
       return $response;
 
     }
-    
+
     public function index(): JsonResponse
     {
         
@@ -60,14 +60,18 @@ class UserController extends AbstractController
 
     public function create(Request $request){
       // Recoger los datos por post
+      $json = $request->get('json', null);
 
       // Decodificar el json
+      // indicar true para convertirlos en un arreglos con valores asociados
+      $params = json_decode($json);
 
       // Respuesta por defecto.
       $data = [
         'status' => 'Success',
         'code' => 200,
-        'message' => 'El usuario no se ha creado'
+        'message' => 'El usuario no se ha creado',
+        'params' => $params
       ];
 
       // Comprobar y validar datos
@@ -81,6 +85,19 @@ class UserController extends AbstractController
       // si no existe, guardarlo en la bd
 
       // respuesta en json
+      //? Primera forma de retornar en JSON
+      /*
+      Solo Se debe usar para retornar arreglos o un conjunto de objetos.
       return $this->resjson($data);
+      */
+      //? Segunda forma de retornar en JSON
+      /*
+      Se puede usar para retornar objetos o un conjunto de ellos pero aveces
+      presenta problemas para los arreglos.
+      return $this->json($data);
+      */
+      //** Tercera forma, esta es la más completa, pero se requiere importar un paquete
+      //** ese es: Symfony\Component\HttpFoundation\JsonResponse;
+      return new JsonResponse($data);
     }
 }
