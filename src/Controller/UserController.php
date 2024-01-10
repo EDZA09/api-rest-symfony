@@ -9,7 +9,18 @@ use App\Entity\Video;
 
 class UserController extends AbstractController
 {
-    
+ 
+    public function resjson(){
+      // Serializar datos con servicio serializer
+
+      // Response con httpFoundation
+
+      // Asignar contenido a la respuesta
+
+      // Indicar formato de respuesta
+
+      // Devolver la respuesta
+    }
     public function index(): JsonResponse
     {
         
@@ -17,7 +28,14 @@ class UserController extends AbstractController
         $video_repo = $this->getDoctrine()->getRepository(User::class);
         
         $users = $user_repo->findAll();
-        
+
+        $user = $user_repo->find(1);
+
+        $data = [
+          'message' => 'Welcome to your new controller!',
+          'path' => 'src/Controller/UserController.php',
+        ]
+        /*
         foreach ($users as $user){
             echo "<h1>{$user->getName()} {$user->getSurname()}</h1>";
             
@@ -26,10 +44,7 @@ class UserController extends AbstractController
             }
         }
         
-        die();
-        return $this->json([
-            'message' => 'Welcome to your new controller!',
-            'path' => 'src/Controller/UserController.php',
-        ]);
+        die();*/
+        return $this->json($user);
     }
 }
