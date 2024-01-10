@@ -29,6 +29,7 @@ class UserController extends AbstractController
       return $response;
 
     }
+    
     public function index(): JsonResponse
     {
         
@@ -63,6 +64,11 @@ class UserController extends AbstractController
       // Decodificar el json
 
       // Respuesta por defecto.
+      $data = [
+        'status' => 'Success',
+        'code' => 200,
+        'message' => 'El usuario no se ha creado'
+      ];
 
       // Comprobar y validar datos
 
@@ -75,5 +81,6 @@ class UserController extends AbstractController
       // si no existe, guardarlo en la bd
 
       // respuesta en json
+      return $this->resjson($data);
     }
 }
