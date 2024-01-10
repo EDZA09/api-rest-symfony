@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use App\Entity\User;
 use App\Entity\Video;
@@ -10,8 +12,9 @@ use App\Entity\Video;
 class UserController extends AbstractController
 {
  
-    public function resjson(){
+    public function resjson($data){
       // Serializar datos con servicio serializer
+      $json = $this->get('serializer')->serialize($data, 'json');
 
       // Response con httpFoundation
 
