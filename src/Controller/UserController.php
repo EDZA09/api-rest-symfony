@@ -17,12 +17,17 @@ class UserController extends AbstractController
       $json = $this->get('serializer')->serialize($data, 'json');
 
       // Response con httpFoundation
+      $response = new Response();
 
       // Asignar contenido a la respuesta
+      $response ->setContent($json);
 
       // Indicar formato de respuesta
+      $response->headers->set('Content-Type', 'application/json');
 
       // Devolver la respuesta
+      return $response;
+
     }
     public function index(): JsonResponse
     {
