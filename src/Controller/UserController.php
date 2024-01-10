@@ -56,4 +56,24 @@ class UserController extends AbstractController
         die();*/
         return $this->json($videos);
     }
+
+    public function create(Request $request){
+      // Recoger los datos por post
+
+      // Decodificar el json
+
+      // Respuesta por defecto.
+
+      // Comprobar y validar datos
+
+      // Si la validación es correcta, crear el objeto del usuario
+
+      // Cifrar la contraseña
+
+      // Comprobar si el usuario existe
+
+      // si no existe, guardarlo en la bd
+
+      // respuesta en json
+    }
 }
