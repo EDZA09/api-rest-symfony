@@ -166,7 +166,6 @@ class User implements \JsonSerializable
         "name" => $this->name,
         "surname" => $this->surname,
         "email" => $this->email,
-        "password" => $this->password,
       ];
     }
 
