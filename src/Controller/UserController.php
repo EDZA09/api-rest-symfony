@@ -6,6 +6,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\Validator\Validation;
+use Symfony\Component\Validator\Constraints\Email;
 
 use App\Entity\User;
 use App\Entity\Video;
@@ -81,7 +83,8 @@ class UserController extends AbstractController
         $email = (!empty($params->email)) ? $params->email : null;
         $password = (!empty($params->password)) ? $params->password : null;
 
-        
+        $validator = Validation::createValidator();
+        $validate_email = $validator->validate($email, [new Email()]);
       }
 
       // Si la validación es correcta, crear el objeto del usuario
