@@ -76,10 +76,12 @@ class UserController extends AbstractController
 
       // Comprobar y validar datos
       if($json != null){
-        $name
-        $surname
-        $email
-        $password
+        $name = (!empty($params->name)) ? $params->name : null;
+        $surname = (!empty($params->surname)) ? $params->surname : null;
+        $email = (!empty($params->email)) ? $params->email : null;
+        $password = (!empty($params->password)) ? $params->password : null;
+
+        
       }
 
       // Si la validación es correcta, crear el objeto del usuario
