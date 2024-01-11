@@ -89,30 +89,23 @@ class UserController extends AbstractController
         ]);
         
         if(!empty($email) && count($validate_email) == 0 && !empty($password) && !empty($name) && !empty($surname)){
-          $data = [
-            'status' => 'Success',
-            'code' => 200,
-            'message' => 'Validación correcta',
-            'email_validation' => $validate_email
-          ];
-        } else {
-          $data = [
-            'status' => 'Error',
-            'code' => 400,
-            'message' => 'Validación Incorrecta',
-            "params" => $email,
-            'email_validation' => count($validate_email)
-          ];
+          // Si la validación es correcta, crear el objeto del usuario
+          $user = new User();
+          $user->setName($name);
+          $user->setSurname($surname);
+          $user->setEmail($email);
+          $user->setRole('ROLE_USER');
+          $user->setCreatedAt(new \DateTime("now"));
+        
+
+          // Cifrar la contraseña
+          $pwd = hash('sha256', $password());
+          $user->setPassword($password);
+          // Comprobar si el usuario existe
+
+          // si no existe, guardarlo en la bd
         }
       }
-
-      // Si la validación es correcta, crear el objeto del usuario
-
-      // Cifrar la contraseña
-
-      // Comprobar si el usuario existe
-
-      // si no existe, guardarlo en la bd
 
       // respuesta en json
       //? Primera forma de retornar en JSON
