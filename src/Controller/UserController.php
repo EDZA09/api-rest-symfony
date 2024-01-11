@@ -75,6 +75,12 @@ class UserController extends AbstractController
       ];
 
       // Comprobar y validar datos
+      if($json != null){
+        $name
+        $surname
+        $email
+        $password
+      }
 
       // Si la validación es correcta, crear el objeto del usuario
 
