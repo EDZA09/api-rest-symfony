@@ -75,16 +75,35 @@ class UserController extends AbstractController
         'message' => 'El usuario no se ha creado',
         'params' => $params
       ];
-
+      
       // Comprobar y validar datos
       if($json != null){
         $name = (!empty($params->name)) ? $params->name : null;
         $surname = (!empty($params->surname)) ? $params->surname : null;
         $email = (!empty($params->email)) ? $params->email : null;
         $password = (!empty($params->password)) ? $params->password : null;
-
+        
         $validator = Validation::createValidator();
-        $validate_email = $validator->validate($email, [new Email()]);
+        $validate_email = $validator->validate($email, [
+          new Email()
+        ]);
+        
+        if(!empty($email) && count($validate_email) == 0 && !empty($password) && !empty($name) && !empty($surname)){
+          $data = [
+            'status' => 'Success',
+            'code' => 200,
+            'message' => 'Validación correcta',
+            'email_validation' => $validate_email
+          ];
+        } else {
+          $data = [
+            'status' => 'Error',
+            'code' => 400,
+            'message' => 'Validación Incorrecta',
+            "params" => $email,
+            'email_validation' => count($validate_email)
+          ];
+        }
       }
 
       // Si la validación es correcta, crear el objeto del usuario
