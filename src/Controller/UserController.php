@@ -109,6 +109,9 @@ class UserController extends AbstractController
           $isset_user = $user_repo->findBy(array('email'=> $email));
           if(count($isset_user) == 0) {
             // si no existe, guardarlo en la bd
+            $em->persist($user);
+            $em->flush();
+
             $data = [
             'status' => 'Success',
             'code' => 200,
