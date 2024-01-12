@@ -145,4 +145,19 @@ class UserController extends AbstractController
       //** ese es: Symfony\Component\HttpFoundation\JsonResponse;
       return new JsonResponse($data);
     }
+
+    public function login(Request $request){
+      // Recibir los datos por post
+
+      // Mensaje por defecto
+
+      // Comprobar y validar los datos
+
+      //cifrar contrasela
+
+      // Si todo es válido, llamaremos a un servicio
+      // para identificar al usuario (token JWT o un objeto JSON)
+
+      // Si nos devuelve bien los datos, lo Retorno.
+    }
 }
