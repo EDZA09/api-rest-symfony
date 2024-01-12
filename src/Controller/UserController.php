@@ -105,6 +105,13 @@ class UserController extends AbstractController
           $doctrine = $this->getDoctrine();
           $em = $doctrine->getManager();
 
+          $user_repo = $doctrine->getRepository(User::class);
+          $isset_user = $user_repo->findBy(array('email'=> $email));
+          if(count($isset_user) == 0) {
+
+          } else {
+
+          }
           // si no existe, guardarlo en la bd
 
         }
