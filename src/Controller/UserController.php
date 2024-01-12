@@ -108,11 +108,20 @@ class UserController extends AbstractController
           $user_repo = $doctrine->getRepository(User::class);
           $isset_user = $user_repo->findBy(array('email'=> $email));
           if(count($isset_user) == 0) {
-
+            // si no existe, guardarlo en la bd
+            $data = [
+            'status' => 'Success',
+            'code' => 200,
+            'message' => 'El usuario Creado Existosamente',
+            'user' => $user
+            ];
           } else {
-
+            $data = [
+            'status' => 'Error',
+            'code' => 500,
+            'message' => 'El usuario Ya existe',
+            ];
           }
-          // si no existe, guardarlo en la bd
 
         }
       }
