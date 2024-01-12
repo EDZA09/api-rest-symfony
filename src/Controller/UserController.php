@@ -96,14 +96,17 @@ class UserController extends AbstractController
           $user->setEmail($email);
           $user->setRole('ROLE_USER');
           $user->setCreatedAt(new \DateTime("now"));
-        
 
           // Cifrar la contraseña
-          $pwd = hash('sha256', $password());
+          $pwd = hash('sha256', $password);
           $user->setPassword($password);
+
           // Comprobar si el usuario existe
+          $doctrine = $this->getDoctrine();
+          $em = $doctrine->getManager();
 
           // si no existe, guardarlo en la bd
+
         }
       }
 
