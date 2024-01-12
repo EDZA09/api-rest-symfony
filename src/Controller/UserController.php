@@ -150,6 +150,11 @@ class UserController extends AbstractController
       // Recibir los datos por post
 
       // Mensaje por defecto
+      $data = [
+        'status' => 'error',
+        'code' => 400,
+        'message'=>'El usuario no se ha posido identificar'
+      ];
 
       // Comprobar y validar los datos
 
@@ -159,5 +164,6 @@ class UserController extends AbstractController
       // para identificar al usuario (token JWT o un objeto JSON)
 
       // Si nos devuelve bien los datos, lo Retorno.
+      return $this->resjson($data);
     }
 }
