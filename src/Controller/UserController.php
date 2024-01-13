@@ -153,12 +153,12 @@ class UserController extends AbstractController
       $data = [
         'status' => 'error',
         'code' => 400,
-        'message'=>'El usuario no se ha posido identificar'
+        'message'=>'El usuario no se ha podido identificar'
       ];
 
       // Comprobar y validar los datos
 
-      //cifrar contrasela
+      //cifrar contraseña
 
       // Si todo es válido, llamaremos a un servicio
       // para identificar al usuario (token JWT o un objeto JSON)
