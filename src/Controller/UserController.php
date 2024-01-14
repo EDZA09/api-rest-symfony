@@ -148,6 +148,8 @@ class UserController extends AbstractController
 
     public function login(Request $request){
       // Recibir los datos por post
+      $json  = $request->get('json', null);
+      $params = json_decode($json);
 
       // Mensaje por defecto
       $data = [
@@ -157,7 +159,9 @@ class UserController extends AbstractController
       ];
 
       // Comprobar y validar los datos
+      if($json != null){
 
+      }
       //cifrar contraseña
 
       // Si todo es válido, llamaremos a un servicio
