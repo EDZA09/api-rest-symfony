@@ -164,7 +164,8 @@ class UserController extends AbstractController
         $password = (!empty($params->password) ? $params->password : null);
         $gettoken = (!empty($params->gettoken) ? $params->gettoken : null);
 
-
+        $validator = Validation::crateValidator();
+        $validate_email = $validator->validate($email, [ new Email]);
       }
       //cifrar contraseña
 
