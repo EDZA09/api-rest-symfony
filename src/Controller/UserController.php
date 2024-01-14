@@ -160,6 +160,10 @@ class UserController extends AbstractController
 
       // Comprobar y validar los datos
       if($json != null){
+        $email = (!empty($params->email) ? $params->email : null);
+        $password = (!empty($params->password) ? $params->password : null);
+        $gettoken = (!empty($params->gettoken) ? $params->gettoken : null);
+
 
       }
       //cifrar contraseña
