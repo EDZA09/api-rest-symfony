@@ -166,13 +166,16 @@ class UserController extends AbstractController
 
         $validator = Validation::crateValidator();
         $validate_email = $validator->validate($email, [ new Email]);
+
+        if(!empty($email) && count($validate_email) == 0 && !empty($password)){
+          //cifrar contraseña
+    
+          // Si todo es válido, llamaremos a un servicio
+          // para identificar al usuario (token JWT o un objeto JSON)
+    
+          // Si nos devuelve bien los datos, lo Retorno.
+        }
       }
-      //cifrar contraseña
-
-      // Si todo es válido, llamaremos a un servicio
-      // para identificar al usuario (token JWT o un objeto JSON)
-
-      // Si nos devuelve bien los datos, lo Retorno.
       return $this->resjson($data);
     }
 }
