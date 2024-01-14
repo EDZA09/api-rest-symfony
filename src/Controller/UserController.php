@@ -164,18 +164,19 @@ class UserController extends AbstractController
         $password = (!empty($params->password) ? $params->password : null);
         $gettoken = (!empty($params->gettoken) ? $params->gettoken : null);
 
-        $validator = Validation::crateValidator();
+        $validator = Validation::createValidator();
         $validate_email = $validator->validate($email, [ new Email]);
 
         if(!empty($email) && count($validate_email) == 0 && !empty($password)){
           //cifrar contraseña
+          $pwd = hash("sha256", $password);
     
           // Si todo es válido, llamaremos a un servicio
           // para identificar al usuario (token JWT o un objeto JSON)
     
-          // Si nos devuelve bien los datos, lo Retorno.
         }
       }
+      // Si nos devuelve bien los datos, lo Retorno.
       return $this->resjson($data);
     }
 }
