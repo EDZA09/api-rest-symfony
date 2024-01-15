@@ -100,7 +100,7 @@ class UserController extends AbstractController
 
           // Cifrar la contraseña
           $pwd = hash('sha256', $password);
-          $user->setPassword($password);
+          $user->setPassword($pwd);
 
           // Comprobar si el usuario existe
           $doctrine = $this->getDoctrine();
