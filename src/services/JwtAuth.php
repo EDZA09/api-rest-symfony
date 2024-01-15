@@ -8,12 +8,14 @@ use App\Entity\User;
 class JwtAuth {
 
   public $manager;
+  public $key;
 
   public function __construct($manager){
     $this->manager = $manager;
+    $this->key = "esta_es_la_secret.12496285";
   }
 
-  public function signup($email, $password){
+  public function signup($email, $password, $gettoken){
     // Comprobar si el usuario existe
     $user = $this->manager->geRepositoty(User::class)->findOneBy([
       'email' => $email,
@@ -34,6 +36,8 @@ class JwtAuth {
         'iat' => time(),
         'exp'=> time() + (7*24*60*60)
       ];
+
+      $jwt = JWT::encode($token, $this->key, 'HS256');
     }
 
     // Devolver datos
