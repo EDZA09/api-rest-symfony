@@ -25,6 +25,16 @@ class JwtAuth {
       $signup = true;
     }
     // Comprobar el flag gettoken, condición
+    if($signup){
+      $token = [
+        'sub' => $user->id,
+        'name' => $user->name,
+        'surname' => $user->surname,
+        'email' => $user->email,
+        'iat' => time(),
+        'exp'=> time() + (7*24*60*60)
+      ];
+    }
 
     // Devolver datos
     return "Hola mundo, desde el servicio";
