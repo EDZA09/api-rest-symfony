@@ -15,13 +15,14 @@ class JwtAuth {
 
   public function signup($email, $password){
     // Comprobar si el usuario existe
-
-    // Si existe, Generar el token
+    $user = $this->manager->geRepositoty(User::class)->findOneBy([
+      'email' => $email,
+      'password' => $password
+    ]);
 
     // Comprobar el flag gettoken, condición
 
-    // DPevolver datos
+    // Devolver datos
     return "Hola mundo, desde el servicio";
   }
 }
-
