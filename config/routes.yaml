@@ -18,6 +18,11 @@ login:
   controller: App\Controller\UserController::login
   methods: [POST]
 
+user_edit:
+  path: /user/edit
+  controller: App\Controller\UserController::edit
+  methods: [PUT]
+
 # Rutas para Controlador de Vídeo
 video:
   path: /video
