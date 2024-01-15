@@ -38,7 +38,7 @@ class JwtAuth {
       
       // Comprobar el flag gettoken, condición
       $jwt = JWT::encode($token, $this->key, 'HS256');
-      if(!empty(gettoken)){
+      if(!empty($gettoken)){
         $data = $jwt;
       } else {
         $decoded = JWT::decode($jwt, $this->key, 'HS256');
