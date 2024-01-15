@@ -17,7 +17,7 @@ class JwtAuth {
 
   public function signup($email, $password, $gettoken = null){
     // Comprobar si el usuario existe
-    $user = $this->manager->geRepositoty(User::class)->findOneBy([
+    $user = $this->manager->getRepository(User::class)->findOneBy([
       'email' => $email,
       'password' => $password
     ]);
@@ -31,7 +31,7 @@ class JwtAuth {
         'sub' => $user->id,
         'name' => $user->name,
         'surname' => $user->surname,
-        'email' => $user->email,
+        'email' => $user->mail,
         'iat' => time(),
         'exp'=> time() + (7*24*60*60)
       ];
