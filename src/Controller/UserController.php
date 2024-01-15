@@ -195,9 +195,10 @@ class UserController extends AbstractController
 
       $data = [
         'status' => 'error',
-        'code' => 'método update del controlador usuarios'
+        'code' => 400,
+        'message'=>'método update del controlador usuarios'
       ];
 
-      $this->resjson($data);
+      return $this->resjson($data);
     }
 }
