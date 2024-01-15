@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use Firebase\JWT\JWT;
+use Firebase\JWT\Key;
 use App\Entity\User;
 
 class JwtAuth {
@@ -41,7 +42,7 @@ class JwtAuth {
       if(!empty($gettoken)){
         $data = $jwt;
       } else {
-        $decoded = JWT::decode($jwt, $this->key, 'HS256');
+        $decoded = JWT::decode($jwt, new Key ($this->key,'HS256'));
         $data = $decoded;
       }
     } else {
