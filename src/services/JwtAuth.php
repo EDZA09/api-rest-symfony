@@ -19,7 +19,11 @@ class JwtAuth {
       'email' => $email,
       'password' => $password
     ]);
-
+    $signup = false;
+    // Si existe, Generar el token
+    if(is_object($user)){
+      $signup = true;
+    }
     // Comprobar el flag gettoken, condición
 
     // Devolver datos
