@@ -13,7 +13,14 @@ class JwtAuth {
     $this->manager = $manager;
   }
 
-  public function signup(){
+  public function signup($email, $password){
+    // Comprobar si el usuario existe
+
+    // Si existe, Generar el token
+
+    // Comprobar el flag gettoken, condición
+
+    // DPevolver datos
     return "Hola mundo, desde el servicio";
   }
 }
