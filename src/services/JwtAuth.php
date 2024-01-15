@@ -28,10 +28,10 @@ class JwtAuth {
     }
     if($signup){
       $token = [
-        'sub' => $user->id,
-        'name' => $user->name,
-        'surname' => $user->surname,
-        'email' => $user->mail,
+        'sub' => $user->getId(),
+        'name' => $user->getName(),
+        'surname' => $user->getSurname(),
+        'email' => $user->getEmail(),
         'iat' => time(),
         'exp'=> time() + (7*24*60*60)
       ];
