@@ -174,9 +174,8 @@ class UserController extends AbstractController
     
           // Si todo es válido, llamaremos a un servicio
           // para identificar al usuario (token JWT o un objeto JSON)
-          if($gettoken){
+          if($gettoken != 'false'){
             $signup = $jwt_auth->signup($email, $pwd, $gettoken);
-            die();
           } else {
             $signup = $jwt_auth->signup($email, $pwd);
           }
