@@ -174,7 +174,7 @@ class UserController extends AbstractController
     
           // Si todo es válido, llamaremos a un servicio
           // para identificar al usuario (token JWT o un objeto JSON)
-          if($gettoken != 'false'){
+          if($gettoken != 'false' || $gettoken != false){
             $signup = $jwt_auth->signup($email, $pwd, $gettoken);
           } else {
             $signup = $jwt_auth->signup($email, $pwd);
@@ -190,6 +190,7 @@ class UserController extends AbstractController
 
     public function edit(Request $request){
       // Recoger la cabecera de autenticación
+      $token = $request->headers->get('Authorization');
 
       // Crear un método para comprobar si el token es correcto
 
@@ -200,7 +201,8 @@ class UserController extends AbstractController
       $data = [
         'status' => 'error',
         'code' => 400,
-        'message'=>'método update del controlador usuarios'
+        'message'=>'método update del controlador usuarios',
+        'token' => $token,
       ];
 
       return $this->resjson($data);
