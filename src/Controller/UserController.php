@@ -196,8 +196,26 @@ class UserController extends AbstractController
       $authCheck = $jwt_auth->checkToken($token);
 
       // Si es correcto, acer la actualización del usuario
+      if($authCheck){
+        // Actualizar usuario
 
-      //...
+        // Conseguir el Entity manager
+
+        // Obtener los datos del usuario identificado
+
+        // Construir el usuario a actualizar completo
+
+        // Recoger los datos por POST
+
+        // Comprobar y Validar los datos
+
+        // Asignar nuevos datos al objeto del usuario
+
+        // Comprobar duplicados
+
+        // Guardar cambios en la base de datos
+
+      }
 
       $data = [
         'status' => 'error',
