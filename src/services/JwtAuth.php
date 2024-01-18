@@ -59,14 +59,19 @@ class JwtAuth {
 
   public function checkToken($jwt) {
     $auth = false;
+    try {
     $decoded = JWT::decode($jwt, new Key($this->key, 'HS256'));
-
+    } catch (\UnexpectedValueException $e) {
+      $auth = false;
+    } catch (\DomainException $e) {
+      $auth = false;
+    }
     if(isset($decoded) && is_object($decoded) && isset($decoded->sub)){
       $auth = true;
     } else {
       $auth = false;
     }
 
-    return auth;
+    return $auth;
   }
 }
