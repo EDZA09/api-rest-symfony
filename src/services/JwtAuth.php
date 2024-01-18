@@ -56,4 +56,12 @@ class JwtAuth {
     // Devolver datos
     return $data;
   }
+
+  public function checkToken($jwt) {
+    $auth = false;
+
+
+
+    return auth;
+  }
 }
