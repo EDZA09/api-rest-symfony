@@ -188,11 +188,12 @@ class UserController extends AbstractController
       return $this->resjson($data);
     }
 
-    public function edit(Request $request){
+    public function edit(Request $request, JwtAuth $jwt_auth){
       // Recoger la cabecera de autenticación
       $token = $request->headers->get('Authorization');
 
       // Crear un método para comprobar si el token es correcto
+      $authCheck = $jwt_auth->checkToken($token);
 
       // Si es correcto, acer la actualización del usuario
 
@@ -203,6 +204,7 @@ class UserController extends AbstractController
         'code' => 400,
         'message'=>'método update del controlador usuarios',
         'token' => $token,
+        'authCheck' => $authCheck
       ];
 
       return $this->resjson($data);
