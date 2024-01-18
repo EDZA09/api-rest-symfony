@@ -59,8 +59,8 @@ class JwtAuth {
 
   public function checkToken($jwt) {
     $auth = false;
-
-
+    $decoded = JWT::decode($jwt, new Key($this->key, 'HS256'));
+    
 
     return auth;
   }
