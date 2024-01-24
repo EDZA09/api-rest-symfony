@@ -194,6 +194,13 @@ class UserController extends AbstractController
 
       // Crear un método para comprobar si el token es correcto
       $authCheck = $jwt_auth->checkToken($token);
+      
+      // Respuesta por defecto
+      $data = [
+        'status' => 'error',
+        'code' => 400,
+        'message' => 'Usuario no Actualizado'
+      ];
 
       // Si es correcto, hacer la actualización del usuario
       if($authCheck){
