@@ -41,4 +41,15 @@ class VideoController extends AbstractController
             'path' => 'src/Controller/VideoController.php',
         ]);
     }
+    
+    public function newVideo(Request $request, JwtAuth $jwt_auth) {
+        
+        $data = [
+            'status' => 'error',
+            'code' => 400,
+            'message' => 'El vídeo no ha podido crearse',
+        ];
+        
+        return $this->resjson($data);
+    }
 }
