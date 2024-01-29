@@ -194,7 +194,7 @@ class UserController extends AbstractController
 
       // Crear un método para comprobar si el token es correcto
       $authCheck = $jwt_auth->checkToken($token);
-      
+
       // Respuesta por defecto
       $data = [
         'status' => 'error',
@@ -223,12 +223,30 @@ class UserController extends AbstractController
         $params = json_decode($json,true);
 
         // Comprobar y Validar los datos
+        if(!empty($json)){
+            $name = (!empty($params->name)) ? $params->name : null;
+            $surname = (!empty($params->surname)) ? $params->surname : null;
+            $email = (!empty($params->email)) ? $params->email : null;
+            
+            $validator = Validation::createValidator();
+            $validate_email = $validator->validate($email, [
+                new Email()
+            ]);
+            
+            if(!empty($email) && count($validate_email) == 0 && !empty($name) && !empty($surname)){
+                // Asignar nuevos datos al objeto del usuario
+                
+                // Comprobar duplicados
+        
+                // Guardar cambios en la base de datos
+                
+            
+            }
+          
+    
+            
+        }
 
-        // Asignar nuevos datos al objeto del usuario
-
-        // Comprobar duplicados
-
-        // Guardar cambios en la base de datos
 
       }
 
