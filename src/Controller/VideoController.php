@@ -15,6 +15,25 @@ use App\Services\JwtAuth;
 
 class VideoController extends AbstractController
 {
+    
+    private function resjson($data)
+    {
+        // Serializar datos con servicio serializer
+        $json = $this->get('serializer')->serialize($data, 'json');
+        
+        // Response con httpFoundation
+        $response = new Response();
+        
+        // Asignar contenido a la respuesta
+        $response->setContent($json);
+        
+        // Indicar formato de respuesta
+        $response->headers->set('Content-Type', 'application/json');
+        
+        // Devolver la respuesta
+        return $response;
+    }
+    
     public function index(): JsonResponse
     {
         return $this->json([
