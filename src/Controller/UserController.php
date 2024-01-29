@@ -235,6 +235,9 @@ class UserController extends AbstractController
             
             if(!empty($email) && count($validate_email) == 0 && !empty($name) && !empty($surname)){
                 // Asignar nuevos datos al objeto del usuario
+                $user->setName($name);
+                $user->setSurname($surname);
+                $user->setEmail($email);
                 
                 // Comprobar duplicados
         
