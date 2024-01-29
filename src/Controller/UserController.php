@@ -240,8 +240,14 @@ class UserController extends AbstractController
                 $user->setEmail($email);
                 
                 // Comprobar duplicados
-        
-                // Guardar cambios en la base de datos
+                $isset_user = $user_repo->findBy([
+                    'email' == $email
+                ]);
+                
+                if(count($isset_user)== 0 || $identity->email == $email){
+                    // Guardar cambios en la base de datos
+                                        
+                }
                 
             
             }
