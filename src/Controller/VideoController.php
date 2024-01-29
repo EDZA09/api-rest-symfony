@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -12,44 +11,57 @@ use App\Entity\User;
 use App\Entity\Video;
 use App\Services\JwtAuth;
 
-
 class VideoController extends AbstractController
 {
-    
+
     private function resjson($data)
     {
         // Serializar datos con servicio serializer
         $json = $this->get('serializer')->serialize($data, 'json');
-        
+
         // Response con httpFoundation
         $response = new Response();
-        
+
         // Asignar contenido a la respuesta
         $response->setContent($json);
-        
+
         // Indicar formato de respuesta
         $response->headers->set('Content-Type', 'application/json');
-        
+
         // Devolver la respuesta
         return $response;
     }
-    
+
     public function index(): JsonResponse
     {
         return $this->json([
             'message' => 'Welcome to your new controller!',
-            'path' => 'src/Controller/VideoController.php',
+            'path' => 'src/Controller/VideoController.php'
         ]);
     }
-    
-    public function newVideo(Request $request, JwtAuth $jwt_auth) {
+
+    public function newVideo(Request $request, JwtAuth $jwt_auth)
+    {
+        // Recoger el token
+        
+        // Comprobar si es correcto
+        
+        // Recoger datos por post
+        
+        // Recoger el objeto del usuario identificado
+        
+        // Comprobar y Validar datos
+        
+        // Guardar el nuevo video favorito en la bd
+        
+        // Devolver una respuesta
         
         $data = [
             'status' => 'error',
             'code' => 400,
-            'message' => 'El vídeo no ha podido crearse',
+            'message' => 'El vídeo no ha podido crearse'
         ];
-        
+
         return $this->resjson($data);
     }
 }
