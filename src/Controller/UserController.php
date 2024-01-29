@@ -244,28 +244,27 @@ class UserController extends AbstractController
                     'email' == $email
                 ]);
                 
-                if(count($isset_user)== 0 || $identity->email == $email){
+                if(count($isset_user) == 0 || $identity->email == $email){
                     // Guardar cambios en la base de datos
-                                        
+                    $em->persist($user);
+                    $em->flush();
+                    
+                    $data = [
+                        'status' => 'success',
+                        'code' => 200,
+                        'message' => 'Usuario Actualizado',
+                        'user' => $user
+                    ];
+                } else {
+                    $data = [
+                        'status' => 'error',
+                        'code' => 400,
+                        'message' => 'El Usuario ya existe'
+                    ];
                 }
-                
-            
             }
-          
-    
-            
         }
-
-
       }
-
-      $data = [
-        'status' => 'error',
-        'code' => 400,
-        'message'=>'método update del controlador usuarios',
-        'token' => $token,
-        'authCheck' => $authCheck
-      ];
 
       return $this->resjson($data);
     }
