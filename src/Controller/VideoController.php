@@ -78,7 +78,17 @@ class VideoController extends AbstractController
                     ]);
                     
                     $video = new Video();
-
+                    $video->setUser($user);
+                    $video->setTitle($title);
+                    $video->setDescription($description);
+                    $video->setUrl($url);
+                    $video->setStatus('normal');
+                    
+                    $createdAt = new \DateTime('now');
+                    $updatedAt = new \DateTime('now');
+                    
+                    $video->setCreatedAt($createdAt);
+                    $video->setUpdatedAt($updatedAt);
                 }
             }
 
