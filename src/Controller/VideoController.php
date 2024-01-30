@@ -77,6 +77,7 @@ class VideoController extends AbstractController
                         'id'=> $user_id
                     ]);
                     
+                    $video = new Video();
 
                 }
             }
