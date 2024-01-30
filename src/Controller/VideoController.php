@@ -10,6 +10,7 @@ use Symfony\Component\Validator\Constraints\Email;
 use App\Entity\User;
 use App\Entity\Video;
 use App\Services\JwtAuth;
+use Doctrine\Persistence\ManagerRegistry;
 
 class VideoController extends AbstractController
 {
@@ -40,7 +41,7 @@ class VideoController extends AbstractController
         ]);
     }
 
-    public function newVideo(Request $request, JwtAuth $jwt_auth)
+    public function newVideo(Request $request, JwtAuth $jwt_auth, ManagerRegistry $doctrine)
     {
         $data = [
             'status' => 'error',
@@ -71,7 +72,12 @@ class VideoController extends AbstractController
                 
                 if(!empty($user_id) && !empty($title)){                
                     // Guardar el nuevo video favorito en la bd
+                    $em = $doctrine->getManager();
+                    $user = $doctrine->getRepository(User::class)->findOneBy([
+                        'id'=> $user_id
+                    ]);
                     
+
                 }
             }
 
