@@ -43,6 +43,7 @@ class VideoController extends AbstractController
     public function newVideo(Request $request, JwtAuth $jwt_auth)
     {
         // Recoger el token
+        $token = $request->headers->get('Authorization');
         
         // Comprobar si es correcto
         
