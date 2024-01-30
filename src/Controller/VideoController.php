@@ -42,26 +42,21 @@ class VideoController extends AbstractController
 
     public function newVideo(Request $request, JwtAuth $jwt_auth)
     {
-        // Recoger el token
-        $token = $request->headers->get('Authorization');
-        
-        // Comprobar si es correcto
-        
-        // Recoger datos por post
-        
-        // Recoger el objeto del usuario identificado
-        
-        // Comprobar y Validar datos
-        
-        // Guardar el nuevo video favorito en la bd
-        
-        // Devolver una respuesta
-        
         $data = [
             'status' => 'error',
             'code' => 400,
             'message' => 'El vídeo no ha podido crearse'
         ];
+
+        // Recoger el token
+        $token = $request->headers->get('Authorization');
+
+        // Comprobar si es correcto
+        $authCheck = $jwt_auth->checkToken($jwt);
+
+
+
+        // Devolver una respuesta
 
         return $this->resjson($data);
     }
