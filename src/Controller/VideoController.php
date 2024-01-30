@@ -89,6 +89,17 @@ class VideoController extends AbstractController
                     
                     $video->setCreatedAt($createdAt);
                     $video->setUpdatedAt($updatedAt);
+                    
+                    // Guardar en la base de datos
+                    $em->persist($video);
+                    $em->flush();
+                    
+                    $data = [
+                        'status' => 'success',
+                        'code' => 200,
+                        'message' => 'Video se ha guardado',
+                        'video' => $video
+                    ];
                 }
             }
 
