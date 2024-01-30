@@ -69,10 +69,12 @@ class VideoController extends AbstractController
                 $description = (!empty($params->description)) ? $params->description : null;
                 $url = (!empty($params->url)) ? $params->url : null;
                 
-                
+                if(!empty($user_id) && !empty($title)){                
+                    // Guardar el nuevo video favorito en la bd
+                    
+                }
             }
 
-            // Guardar el nuevo video favorito en la bd
         }
 
         // Devolver una respuesta
