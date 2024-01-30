@@ -52,16 +52,25 @@ class VideoController extends AbstractController
         $token = $request->headers->get('Authorization');
 
         // Comprobar si es correcto
-        $authCheck = $jwt_auth->checkToken($jwt);
+        $authCheck = $jwt_auth->checkToken($token);
 
         if ($authCheck) {
             // Recoger datos por post
             $json = $request->get('json', null);
-            $params = json_d($json);
+            $params = json_decode($json);
 
             // Recoger el objeto del usuario identificado
+            $identity = $jwt_auth->checkToken($token, true);
 
             // Comprobar y Validar datos
+            if(!empty($json)){
+                $user_id = ($identity->sub != null) ? $identity->sub : null;
+                $title = (!empty($params->title)) ? $params->title : null;
+                $description = (!empty($params->description)) ? $params->description : null;
+                $url = (!empty($params->url)) ? $params->url : null;
+                
+                
+            }
 
             // Guardar el nuevo video favorito en la bd
         }
