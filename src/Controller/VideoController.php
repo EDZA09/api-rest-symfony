@@ -64,45 +64,44 @@ class VideoController extends AbstractController
             $identity = $jwt_auth->checkToken($token, true);
 
             // Comprobar y Validar datos
-            if(!empty($json)){
+            if (! empty($json)) {
                 $user_id = ($identity->sub != null) ? $identity->sub : null;
-                $title = (!empty($params->title)) ? $params->title : null;
-                $description = (!empty($params->description)) ? $params->description : null;
-                $url = (!empty($params->url)) ? $params->url : null;
-                
-                if(!empty($user_id) && !empty($title)){                
+                $title = (! empty($params->title)) ? $params->title : null;
+                $description = (! empty($params->description)) ? $params->description : null;
+                $url = (! empty($params->url)) ? $params->url : null;
+
+                if (! empty($user_id) && ! empty($title)) {
                     // Guardar el nuevo video favorito en la bd
                     $em = $doctrine->getManager();
                     $user = $doctrine->getRepository(User::class)->findOneBy([
-                        'id'=> $user_id
+                        'id' => $user_id
                     ]);
-                    
+
                     $video = new Video();
                     $video->setUser($user);
                     $video->setTitle($title);
                     $video->setDescription($description);
                     $video->setUrl($url);
                     $video->setStatus('normal');
-                    
+
                     $createdAt = new \DateTime('now');
                     $updatedAt = new \DateTime('now');
-                    
+
                     $video->setCreatedAt($createdAt);
                     $video->setUpdatedAt($updatedAt);
-                    
+
                     // Guardar en la base de datos
                     $em->persist($video);
                     $em->flush();
-                    
+
                     $data = [
                         'status' => 'success',
                         'code' => 200,
-                        'message' => 'Video se ha guardado',
+                        'message' => 'El video se ha guardado',
                         'video' => $video
                     ];
                 }
             }
-
         }
 
         // Devolver una respuesta
