@@ -10,7 +10,7 @@ use Symfony\Component\Validator\Constraints\Email;
 
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\ORM\EntityManagerInterface;
-use Knp\Component\Pager\Pagination\PaginationInterface;
+use Knp\Component\Pager\PaginatorInterface;
 
 use App\Entity\User;
 use App\Entity\Video;
@@ -113,7 +113,7 @@ class VideoController extends AbstractController
         return $this->resjson($data);
     }
 
-    public function videos(Request $request, JwtAuth $jwt_auth, PaginationInterface $paginator, EntityManagerInterface $entity)
+    public function videos(Request $request, JwtAuth $jwt_auth, PaginatorInterface $paginator, EntityManagerInterface $entity)
     {
         // Obtener el Header de autorización
         $token = $request->headers->get('Authorization');
@@ -134,6 +134,7 @@ class VideoController extends AbstractController
 
             // Recoger el parámetro de la url
             $page = $request->query->getInt('page', 1);
+            $items_per_page = 5;
 
             // Invocar paginación
 
