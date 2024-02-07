@@ -111,6 +111,25 @@ class VideoController extends AbstractController
 
     public function videos(Request $request, JwtAuth $jwt_auth)
     {
+        // Obtener el Header de autorización
+        
+        // Comprobar el token
+        
+        // Si es valido,
+        
+        // Conseguir la identidad del usuario
+        
+        // Configurar el bundle de paginación
+        
+        // Hacer una consulta para paginar
+        
+        // Recoger el parámetro de la url
+        
+        // Invocar paginación
+        
+        // Preparar array de datos a retornar
+        
+        
         $data = [
             'status' => "error",
             'code' => 400,
