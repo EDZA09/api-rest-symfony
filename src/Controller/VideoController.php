@@ -7,10 +7,14 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Validator\Validation;
 use Symfony\Component\Validator\Constraints\Email;
+
+use Doctrine\Persistence\ManagerRegistry;
+use Knp\Component\Pager\Pagination\PaginationInterface;
+
 use App\Entity\User;
 use App\Entity\Video;
 use App\Services\JwtAuth;
-use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\ORM\EntityManagerInterface;
 
 class VideoController extends AbstractController
 {
@@ -109,7 +113,7 @@ class VideoController extends AbstractController
         return $this->resjson($data);
     }
 
-    public function videos(Request $request, JwtAuth $jwt_auth)
+    public function videos(Request $request, JwtAuth $jwt_auth, PaginationInterface $paginator, EntityManagerInterface $entity)
     {
         // Obtener el Header de autorización
         $token = $request->headers->get('Authorization');
@@ -122,11 +126,10 @@ class VideoController extends AbstractController
             // Conseguir la identidad del usuario
             $identity = $jwt_auth->checkToken($token, true);
 
-            // Configurar el bundle de paginación
-
+            // Configurar el bundle de paginación -> en services.yaml y bundles.php
+            
             // Hacer una consulta para paginar
 
-            // Recoger el parámetro de la url
 
             // Invocar paginación
 
