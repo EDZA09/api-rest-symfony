@@ -137,6 +137,7 @@ class VideoController extends AbstractController
             $items_per_page = 5;
 
             // Invocar paginación
+            $pagination = $paginator->paginate($dql,$page,$items_per_page);
 
             // Preparar array de datos a retornar
             $data = [
