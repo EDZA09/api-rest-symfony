@@ -131,7 +131,11 @@ class VideoController extends AbstractController
             // Invocar paginación
 
             // Preparar array de datos a retornar
-
+            $data = [
+                'status' => "success",
+                'code' => 200,
+                'message' => "Se pueden listar los videos en este momento"
+            ];
         } else {
             $data = [
                 'status' => "error",
