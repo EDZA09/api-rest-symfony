@@ -120,6 +120,7 @@ class VideoController extends AbstractController
         // Si es valido,
         if ($authCheck) {
             // Conseguir la identidad del usuario
+            $identity = $jwt_auth->checkToken($token, true);
 
             // Configurar el bundle de paginación
 
@@ -130,11 +131,12 @@ class VideoController extends AbstractController
             // Invocar paginación
 
             // Preparar array de datos a retornar
+
         } else {
             $data = [
                 'status' => "error",
                 'code' => 400,
-                'message' => "No se pueden listar los videos en este momento"
+                'message' => "NO se pueden listar los videos en este momento"
             ];
         }
         return $this->resjson($data);
