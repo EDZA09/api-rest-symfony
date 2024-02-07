@@ -144,7 +144,12 @@ class VideoController extends AbstractController
             $data = [
                 'status' => "success",
                 'code' => 200,
-                'message' => "Se pueden listar los videos en este momento"
+                'total_items_count' => $total,
+                'page_actual' => $page,
+                'items_per_page' => $items_per_page,
+                'total_pages' => ceil($total/ $items_per_page),
+                'videos' => $pagination,
+                'user_id' => $identity->sub
             ];
         } else {
             $data = [
