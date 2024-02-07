@@ -9,12 +9,12 @@ use Symfony\Component\Validator\Validation;
 use Symfony\Component\Validator\Constraints\Email;
 
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\Pagination\PaginationInterface;
 
 use App\Entity\User;
 use App\Entity\Video;
 use App\Services\JwtAuth;
-use Doctrine\ORM\EntityManagerInterface;
 
 class VideoController extends AbstractController
 {
@@ -129,7 +129,10 @@ class VideoController extends AbstractController
             // Configurar el bundle de paginación -> en services.yaml y bundles.php
             
             // Hacer una consulta para paginar
+            $dql = "SELECT v FROM App\Entity\Video v Where v.user = {$identity->sub} ORDER BY v.id DESC";
+            $query = $entity->createQuery($dql);
 
+            // Recoger el parámetro de la url
 
             // Invocar paginación
 
