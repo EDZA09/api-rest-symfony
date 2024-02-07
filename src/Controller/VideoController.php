@@ -133,6 +133,7 @@ class VideoController extends AbstractController
             $query = $entity->createQuery($dql);
 
             // Recoger el parámetro de la url
+            $page = $request->query->getInt('page', 1);
 
             // Invocar paginación
 
