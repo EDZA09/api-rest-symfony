@@ -7,11 +7,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Validator\Validation;
 use Symfony\Component\Validator\Constraints\Email;
-
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
-
 use App\Entity\User;
 use App\Entity\Video;
 use App\Services\JwtAuth;
@@ -127,7 +125,7 @@ class VideoController extends AbstractController
             $identity = $jwt_auth->checkToken($token, true);
 
             // Configurar el bundle de paginación -> en services.yaml y bundles.php
-            
+
             // Hacer una consulta para paginar
             $dql = "SELECT v FROM App\Entity\Video v Where v.user = {$identity->sub} ORDER BY v.id DESC";
             $query = $entity->createQuery($dql);
@@ -137,7 +135,7 @@ class VideoController extends AbstractController
             $items_per_page = 5;
 
             // Invocar paginación
-            $pagination = $paginator->paginate($query,$page,$items_per_page);
+            $pagination = $paginator->paginate($query, $page, $items_per_page);
             $total = $pagination->getTotalItemCount();
 
             // Preparar array de datos a retornar
@@ -147,7 +145,7 @@ class VideoController extends AbstractController
                 'total_items_count' => $total,
                 'page_actual' => $page,
                 'items_per_page' => $items_per_page,
-                'total_pages' => ceil($total/ $items_per_page),
+                'total_pages' => ceil($total / $items_per_page),
                 'videos' => $pagination,
                 'user_id' => $identity->sub
             ];
@@ -160,32 +158,40 @@ class VideoController extends AbstractController
         }
         return $this->resjson($data);
     }
-    
-    public function video(Request $request, JwtAuth $jwt_auth, $id = null, ManagerRegistry $doctrine): JsonResponse {
-        
+
+    public function video(Request $request, JwtAuth $jwt_auth, $id = null, ManagerRegistry $doctrine): JsonResponse
+    {
+        // Devolver respuesta
+        $data = [
+            'status' => "error",
+            'code' => 400,
+            'message' => "Video no encontrado"
+        ];
+
         // Capturar el token y comprobar si es correcto
         $token = $request->headers->get('Authorization');
         $authCheck = $jwt_auth->checkToken($token);
-        
-        if($authCheck){
+
+        if ($authCheck) {
             // Sacar la identidad del usuario
             $identity = $jwt_auth->checkToken($token, true);
-            
-            // Obtener el objeto del video en base al id
-            $video = $doctrine->getRepository(Video::class)->find($id);
-            
-            // Comprobar si el video existe y es propiedad del usuario identificado
 
-        } else {
-            // Devolver respuesta
-            $data = [
-                'status' => "error",
-                'code' => 400,
-                'message' => "Video no entrado",
+            // Obtener el objeto del video en base al id
+            $video = $doctrine->getRepository(Video::class)->findOneBy([
                 'id' => $id
-            ];
+            ]);
+
+            // Comprobar si el video existe y es propiedad del usuario identificado
+            if ($video && is_object($video) && $identity->sub == $video->getUser()->getId()) {
+                // Devolver respuesta
+                $data = [
+                    'status' => "success",
+                    'code' => 200,
+                    'video' => $video
+                ];
+            }
+
+            return $this->json($data);
         }
-        
-        return new JsonResponse($data);
     }
 }
