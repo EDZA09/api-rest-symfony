@@ -165,21 +165,25 @@ class VideoController extends AbstractController
         
         // Capturar el token y comprobar si es correcto
         $token = $request->headers->get('Authorization');
+        $authCheck = $jwt_auth->checkToken($token);
         
-        // Sacar la identidad del usuario
+        if($authCheck){
+            // Sacar la identidad del usuario
+            
+            // Obtener el objeto del video en base al id
+            
+            // Comprobar si el video existe y es propiedad del usuario identificado
+            
+        } else {
+            // Devolver respuesta
+            $data = [
+                'status' => "error",
+                'code' => 400,
+                'message' => "Video no entrado",
+                'id' => $id
+            ];
+        }
         
-        // Obtener el objeto del video en base al id
-        
-        // Comprobar si el video existe y es propiedad del usuario identificado
-        
-        // Devolver respuesta
-        
-        $data = [
-            'status' => "error",
-            'code' => 400,
-            'message' => "Video no entrado",
-            'id' => $id
-        ];
         return new JsonResponse($data);
     }
 }
