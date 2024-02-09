@@ -164,6 +164,7 @@ class VideoController extends AbstractController
     public function video(Request $request, JwtAuth $jwt_auth, $id = null): JsonResponse {
         
         // Capturar el token y comprobar si es correcto
+        $token = $request->headers->get('Authorization');
         
         // Sacar la identidad del usuario
         
