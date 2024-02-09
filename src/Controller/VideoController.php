@@ -169,11 +169,13 @@ class VideoController extends AbstractController
         
         if($authCheck){
             // Sacar la identidad del usuario
+            $identity = $jwt_auth->checkToken($token, true);
             
             // Obtener el objeto del video en base al id
             
-            // Comprobar si el video existe y es propiedad del usuario identificado
             
+            // Comprobar si el video existe y es propiedad del usuario identificado
+
         } else {
             // Devolver respuesta
             $data = [
