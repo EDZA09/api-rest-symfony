@@ -161,7 +161,7 @@ class VideoController extends AbstractController
         return $this->resjson($data);
     }
     
-    public function video(Request $request, JwtAuth $jwt_auth, $id = null): JsonResponse {
+    public function video(Request $request, JwtAuth $jwt_auth, $id = null, ManagerRegistry $doctrine): JsonResponse {
         
         // Capturar el token y comprobar si es correcto
         $token = $request->headers->get('Authorization');
@@ -172,7 +172,7 @@ class VideoController extends AbstractController
             $identity = $jwt_auth->checkToken($token, true);
             
             // Obtener el objeto del video en base al id
-            
+            $video = $doctrine->getRepository(Video::class)->find($id);
             
             // Comprobar si el video existe y es propiedad del usuario identificado
 
