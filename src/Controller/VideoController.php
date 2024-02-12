@@ -209,10 +209,17 @@ class VideoController extends AbstractController
             // Obtener el EntityManager
             $em = $doctrine->getManager();
             
-            // Sacar el Repositorio del video
-            $video = $doctrine->getRepository(Video::class);
+            // Sacar el video a eliminar
+            $video = $doctrine->getRepository(Video::class)->findOneBy(['id'=>$id]);
             
-            
+            // Comprobar el objeto del video
+            if($video && is_object($video) && $identity->sub == $video->getUser()->getId()){
+                $status = 200;
+                
+                // Elimino el video y ejecuto la consulta en la BD
+                $em->remove($video);
+                $em->flush();
+            }
         }
         
         // Devolver respuesta
