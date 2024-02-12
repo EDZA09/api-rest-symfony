@@ -105,15 +105,22 @@ class VideoController extends AbstractController
                             'video' => $video
                         ];
                     } else {
-                        // Actualizo el video
+                        // Actualizar el video
                         $video = $doctrine->getRepository(Video::class)->findOneBy([
                             'id' => $id,
                             'user' => $identity->sub
                         ]);
                         
-                        // Comrpuebo el resultado obtenido
+                        // Comprobar el resultado obtenido
                         if($video && is_object($video)){
+                            // Asignar los nuevos valores
+                            $video->setTitle($title);
+                            $video->setDescription($description);
+                            $video->setUrl($url);
                             
+                            $updatedAt = new \DateTime('now');
+                            
+                            $video->setUpdatedAt($updatedAt);
                         }
                     }
                 }
