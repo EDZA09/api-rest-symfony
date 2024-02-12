@@ -106,6 +106,10 @@ class VideoController extends AbstractController
                         ];
                     } else {
                         // Actualizo el video
+                        $video = $doctrine->getRepository(Video::class)->findOneBy([
+                            'id' => $id,
+                            'user' => $identity->sub
+                        ]);
                         
                     }
                 }
@@ -223,7 +227,9 @@ class VideoController extends AbstractController
             $em = $doctrine->getManager();
             
             // Sacar el video a eliminar
-            $video = $doctrine->getRepository(Video::class)->findOneBy(['id'=>$id]);
+            $video = $doctrine->getRepository(Video::class)->findOneBy([
+                'id'=>$id
+            ]);
             
             // Comprobar el objeto del video
             if($video && is_object($video) && $identity->sub == $video->getUser()->getId()){
