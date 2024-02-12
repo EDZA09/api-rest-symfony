@@ -111,6 +111,10 @@ class VideoController extends AbstractController
                             'user' => $identity->sub
                         ]);
                         
+                        // Comrpuebo el resultado obtenido
+                        if($video && is_object($video)){
+                            
+                        }
                     }
                 }
             }
