@@ -124,7 +124,13 @@ class VideoController extends AbstractController
                             
                             $em->persist($video);
                             $em->flush();
-
+                            
+                            $data = [
+                                'status' => 'success',
+                                'code' => 200,
+                                'message' => 'El video se ha actualizado',
+                                'video' => $video
+                            ];
                         }
                     }
                 }
