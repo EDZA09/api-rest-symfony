@@ -43,7 +43,7 @@ class VideoController extends AbstractController
         ]);
     }
 
-    public function newVideo(Request $request, JwtAuth $jwt_auth, ManagerRegistry $doctrine)
+    public function newVideo(Request $request, JwtAuth $jwt_auth, ManagerRegistry $doctrine, $id = null)
     {
         $data = [
             'status' => 'error',
@@ -78,30 +78,36 @@ class VideoController extends AbstractController
                     $user = $doctrine->getRepository(User::class)->findOneBy([
                         'id' => $user_id
                     ]);
-
-                    $video = new Video();
-                    $video->setUser($user);
-                    $video->setTitle($title);
-                    $video->setDescription($description);
-                    $video->setUrl($url);
-                    $video->setStatus('normal');
-
-                    $createdAt = new \DateTime('now');
-                    $updatedAt = new \DateTime('now');
-
-                    $video->setCreatedAt($createdAt);
-                    $video->setUpdatedAt($updatedAt);
-
-                    // Guardar en la base de datos
-                    $em->persist($video);
-                    $em->flush();
-
-                    $data = [
-                        'status' => 'success',
-                        'code' => 200,
-                        'message' => 'El video se ha guardado',
-                        'video' => $video
-                    ];
+                    
+                    if($id == null){ 
+                        // Crear y guardar objeto
+                        $video = new Video();
+                        $video->setUser($user);
+                        $video->setTitle($title);
+                        $video->setDescription($description);
+                        $video->setUrl($url);
+                        $video->setStatus('normal');
+    
+                        $createdAt = new \DateTime('now');
+                        $updatedAt = new \DateTime('now');
+    
+                        $video->setCreatedAt($createdAt);
+                        $video->setUpdatedAt($updatedAt);
+    
+                        // Guardar en la base de datos
+                        $em->persist($video);
+                        $em->flush();
+    
+                        $data = [
+                            'status' => 'success',
+                            'code' => 200,
+                            'message' => 'El video se ha guardado',
+                            'video' => $video
+                        ];
+                    } else {
+                        // Actualizo el video
+                        
+                    }
                 }
             }
         }
