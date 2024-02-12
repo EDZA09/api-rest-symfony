@@ -121,6 +121,10 @@ class VideoController extends AbstractController
                             $updatedAt = new \DateTime('now');
                             
                             $video->setUpdatedAt($updatedAt);
+                            
+                            $em->persist($video);
+                            $em->flush();
+
                         }
                     }
                 }
