@@ -197,8 +197,15 @@ class VideoController extends AbstractController
     
     public function remove(Request $request, JwtAuth $jwt_auth, $id = null, ManagerRegistry $doctrine){
         $status = 400;
+        // Devolver respuesta
+        $data =  [
+            'status' => "error",
+            'code' => $status,
+            'message' => "Video No encontrado"
+        ];
+        
         // Recoger el token del usuario
-        $token = $request->headers->get('json');
+        $token = $request->headers->get('Authorization');
         // Comprobar el token
         $authCheck = $jwt_auth->checkToken($token);
         
@@ -219,15 +226,16 @@ class VideoController extends AbstractController
                 // Elimino el video y ejecuto la consulta en la BD
                 $em->remove($video);
                 $em->flush();
+             
+                // Devolver respuesta
+                $data =  [
+                    'status' => "success",
+                    'code' => $status,
+                    'video_deleted' => $video
+                ];
             }
         }
         
-        // Devolver respuesta
-        $data =  [
-            'status' => "error",
-            'code' => $status,
-            'message' => "Video No encontrado"
-        ];
         return $this->json($data, $status);
     }
 }

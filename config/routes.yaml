@@ -38,6 +38,11 @@ video_list:
   controller: App\Controller\VideoController::videos
   methods: [GET]
 
+video_detail:
+  path: /video/detail/{id}
+  controller: App\Controller\VideoController::video
+  methods: [GET]
+
 video_remove:
   path: /video/remove/{id}
   controller: App\Controller\VideoController::remove
