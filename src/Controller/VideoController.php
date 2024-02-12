@@ -197,6 +197,11 @@ class VideoController extends AbstractController
     
     public function remove(Request $request, JwtAuth $jwt_auth, $id = null){
         $status = 400;
+        // Recoger el token del usuario
+        $token = $request->headers->get('json');
+        // comprobar el token
+        
+        
         // Devolver respuesta
         $data =  [
             'status' => "error",
