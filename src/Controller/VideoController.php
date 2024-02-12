@@ -199,8 +199,15 @@ class VideoController extends AbstractController
         $status = 400;
         // Recoger el token del usuario
         $token = $request->headers->get('json');
-        // comprobar el token
+        // Comprobar el token
+        $authCheck = $jwt_auth->checkToken($token);
         
+        if($authCheck){
+            // Sacar los datos del usuario identificado
+            $identity = $jwt_auth->checkToken($token, true);
+            
+            
+        }
         
         // Devolver respuesta
         $data =  [
