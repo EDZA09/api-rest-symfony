@@ -195,7 +195,7 @@ class VideoController extends AbstractController
         }
     }
     
-    public function remove(Request $request, JwtAuth $jwt_auth, $id = null){
+    public function remove(Request $request, JwtAuth $jwt_auth, $id = null, ManagerRegistry $doctrine){
         $status = 400;
         // Recoger el token del usuario
         $token = $request->headers->get('json');
@@ -205,6 +205,12 @@ class VideoController extends AbstractController
         if($authCheck){
             // Sacar los datos del usuario identificado
             $identity = $jwt_auth->checkToken($token, true);
+            
+            // Obtener el EntityManager
+            $em = $doctrine->getManager();
+            
+            // Sacar el Repositorio del video
+            $video = $doctrine->getRepository(Video::class);
             
             
         }
