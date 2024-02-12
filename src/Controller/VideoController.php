@@ -194,4 +194,15 @@ class VideoController extends AbstractController
             return $this->json($data);
         }
     }
+    
+    public function remove(Request $request, JwtAuth $jwt_auth, $id = null){
+        $status = 400;
+        // Devolver respuesta
+        $data =  [
+            'status' => "error",
+            'code' => $status,
+            'message' => "Video No encontrado"
+        ];
+        return $this->json($data, $status);
+    }
 }
