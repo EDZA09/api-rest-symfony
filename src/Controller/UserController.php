@@ -71,7 +71,7 @@ class UserController extends AbstractController
 
         // Respuesta por defecto.
         $data = [
-            'status' => 'Success',
+            'status' => 'success',
             'code' => 200,
             'message' => 'El usuario no se ha creado',
             'params' => $params
@@ -116,7 +116,7 @@ class UserController extends AbstractController
                     $em->flush();
 
                     $data = [
-                        'status' => 'Success',
+                        'status' => 'success',
                         'code' => 200,
                         'message' => 'El usuario Creado Existosamente',
                         'user' => $user
